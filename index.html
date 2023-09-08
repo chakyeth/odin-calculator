@@ -5,30 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>calculator lol</title>
   <script src="script.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="wrapper">
-    <span style="color: lightblue; font-weight: 900;">chakulator TM</span>
-    <div class="calc-display"></div>
-    <div class="calc-container">
+  <div class="calc-body">
+    <span class="corner-title">chakulator TM</span>
+    <div class="calc-display">
+      <div class="total-input"></div>
+      <div class="current-input"></div>
+    </div>
+    <div class="calc-buttons">
+      <button class="calc-ac-button">AC</button>
+      <button class="calc-ac-button">C</button>
+      <button class="calc-button">+/-</button>
+      <button class="calc-button">+</button>
       <button class="numbers">7</button>
       <button class="numbers">8</button>
       <button class="numbers">9</button>
-      <button class="calc-button">+</button>
+      <button class="calc-button">-</button>
       <button class="numbers">4</button>
       <button class="numbers">5</button>
       <button class="numbers">6</button>
-      <button class="calc-button">-</button>
+      <button class="calc-button">*</button>
       <button class="numbers">1</button>
       <button class="numbers">2</button>
       <button class="numbers">3</button>
-      <button class="calc-button">*</button>
-      <button class="calc-ac-button">AC</button>
-      <button class="numbers">0</button>
-      <button class="calc-button">=</button>
       <button class="calc-button">/</button>
+      <button class="numbers hehe" onclick="confetti()"></button>
+      <button class="numbers">0</button>
+      <button class="numbers decimal">.</button>
+      <button class="calc-button">=</button>
     </div>
   </div>
+
+  <div class="footer">&copy; Chak Yeth 2023 | <a href="https://github.com/chakyeth/odin-calculator">source</a></div>
 </body>
 </html>

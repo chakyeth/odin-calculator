@@ -1,42 +1,65 @@
 body {
-  font-family: 'Courier New', Courier, monospace;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: white;
   align-items: center;
   height: 100vh;
   margin: 0;
+  background: #FFFAF1;
+  gap: 60px;
 }
 
-.wrapper {
-  border: 20px solid lightblue;
-  padding: 10px 10px;
-  border-radius: 10px;
+.corner-title {
+  color: lightblue;
+  font-weight: 900;
+}
+
+.footer {
+  font-size: small;
+}
+
+.calc-body {
+  background: #433e3f;
+  display: flex;
+  flex-direction: column;
+  min-height: 425px;
+  min-width: 340px;
+  border-radius: 20px;
+  padding: 20px;
   box-shadow: 8px 10px 15px 6px #ccc;
 }
 
 .calc-display {
-  height: 70px;
+  background: #c0b7b1;
+  height: 100px;
+  border-radius: 6px;
+  box-shadow: inset 3px 2px 5px #000;
+  margin: 25px 0px;
   display: flex;
-  justify-content: end;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: end;
-  font-size: 45px;
-  padding: 10px 5px;
-  word-wrap: normal;
-  background-color: lightgray;
-  border: 20px solid white;
+  font-size: 30px;
 }
 
-.calc-container {
-  background-color: white;
+.total-input {
+  padding: 10px 10px;
+  font-size: 15px;
+}
+
+.current-input {
+  padding: 10px 10px;
+}
+
+.calc-buttons {
+  padding: 10px 0px;
+  width: 100%;
+  height: 54%;
   display: inline-grid;
-  height: 400px;
-  width: 350px;
   grid-template-columns: repeat(4, 2fr);
-  grid-template-rows: repeat(4, 2fr);
+  grid-template-rows: repeat(5, 2fr);
 }
-
 
 button {
   display: flex;
@@ -47,12 +70,14 @@ button {
   font-size: xx-large;
   font-family: monospace;
   border-radius: 20px;
-  margin: 2px 2px;
-  box-shadow: 2px 2px #ccc;
+  margin: 4px 4px;
+  box-shadow: 3px 3px 3px #000;
 }
 
-button:active {
+button:active:not([disabled]) {
   font-weight: 900;
+  background: #8e6e53;
+  box-shadow: 0px 0px 0px #000;
 }
 
 .numbers {
@@ -61,14 +86,18 @@ button:active {
   border: 0px;
 }
 
+.hehe {
+  background-color: #c0b7b1;
+}
+
 .calc-button {
   background-color: white;
   color: lightblue;
-  border: 2px solid lightblue;
+  border: 0px;
 }
 
 .calc-ac-button {
-  background-color: #FEDD9E;
+  background-color: #c669;
   color: white;
   border: 0px;
 }

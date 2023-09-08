@@ -29,10 +29,14 @@ operate = (operation, firstNum, secondNum) => {
   }
 }
 
-const operationsArray = ['+', '-', '*', '/'];
-const calcDisplayDiv = document.querySelector('.calc-display');
-const buttons = document.querySelectorAll('button');
+const operationsArray = ["+", "-", "*", "/"];
 
+const calcTotalInputDiv = document.querySelector('.total-input');
+const calcCurrentInputDiv = document.querySelector('.current-input');
+const buttons = document.querySelectorAll('button');
+const decimalButton = document.querySelector('.decimal');
+
+let totalInput = '';
 let placeholder = '';
 let firstNum = '';
 let secondNum = '';
@@ -44,68 +48,99 @@ for (button of buttons) {
     let value = e.target.innerHTML;
 
     // button pressed: AC
-    if (value === 'AC') {
+    if (value === 'AC' || (value === 'C' && !placeholder)) {
       resetCalc();
-      calcDisplayDiv.innerHTML = '';
+      calcCurrentInputDiv.innerHTML = '';
     }
 
-    // button pressed: +, -, *, /, =
-    else if (isNaN(value)) {
-      // if a number hasn't been selected first
-      if (placeholder == '') {
-        calcDisplayDiv.innerHTML = 'ERROR';
+    else {
+      // button pressed: numbers
+      if (!isNaN(value) || value == ".") {
+        placeholder = placeholder + value;
+        calcCurrentInputDiv.innerHTML = placeholder;
+
+        if (value == ".") {
+          decimalButton.disabled = true;
+          decimalButton.classList.remove("numbers");
+        } 
       }
-      
-      // if a number has been selected first
-      else if (placeholder !== '' && operationsArray.includes(value)) {
-        // if number in both firstNum and secondNum
-        if (firstNum && chosenOperation) {
+
+      // button pressed: +, -, *, /, =, C
+      else if (isNaN(value)) {
+        // if a number hasn't been selected first
+        if (!placeholder || (value == '=' && !firstNum)) {
+          calcCurrentInputDiv.innerHTML = 'error lol';
+        }
+
+        // if there is a placeholder and user presses C
+        else if (typeof(placeholder) === "string" && value === 'C') {
+          if (placeholder.charAt(placeholder.length - 1) == ".") {
+            enableDecimals();
+          }
+
+          placeholder = placeholder.slice(0, -1);
+          calcCurrentInputDiv.innerHTML = placeholder;
+        }
+
+        // if there is a placeholder and user presses pos/neg
+        else if (typeof(placeholder) == "string" && value === "+/-") {
+          placeholder = String(Number(placeholder) * -1);
+          calcCurrentInputDiv.innerHTML = placeholder;
+        }
+        
+        // if a number has been selected first
+        else if (placeholder && operationsArray.includes(value)) {
+          // if number in both firstNum and secondNum
+          if (firstNum && chosenOperation) {
+            secondNum = Number(placeholder);
+            firstNum = operate(chosenOperation, firstNum, secondNum);
+            calcCurrentInputDiv.innerHTML = firstNum;
+            selectOperation(value);
+            secondNum = '';
+
+            enableDecimals();
+          }
+
+          // place number into firstNum
+          else if (!firstNum && value !== "+/-") {
+            firstNum = Number(placeholder);
+
+            totalInput = placeholder + " " + value;
+            calcTotalInputDiv.innerHTML = totalInput;
+
+            selectOperation(value);
+            enableDecimals();
+          }
+          
+          // place number into secondNum
+          else if (firstNum && value !== "+/-") {
+            secondNum = Number(placeholder);
+            selectOperation(value);
+            enableDecimals();
+          }
+        }
+
+        // equal button
+        else if (value === '=') {
+          enableDecimals();
+
           secondNum = Number(placeholder);
-          firstNum = operate(chosenOperation, firstNum, secondNum);
-          calcDisplayDiv.innerHTML = firstNum;
-          selectOperation(value);
+
+          totalInput = totalInput + " " + placeholder + " = ";
+          calcTotalInputDiv.innerHTML = totalInput;
+
+          placeholder = '';
+
+          result = operate(chosenOperation, firstNum, secondNum);
+          calcCurrentInputDiv.innerHTML = result;
+
+          placeholder = result;
+          firstNum = '';
           secondNum = '';
-        }
-
-        // place number into firstNum
-        else if (firstNum == '') {
-          firstNum = Number(placeholder);
-          selectOperation(value);
-        }
-        // place number into secondNum
-        else if (firstNum) {
-          secondNum = Number(placeholder);
-          selectOperation(value);
+          chosenOperation = '';
         }
       }
-
-      // equal button
-      else if (value === '=') {
-        secondNum = Number(placeholder);
-        placeholder = '';
-
-        result = operate(chosenOperation, firstNum, secondNum);
-        calcDisplayDiv.innerHTML = result;
-
-        placeholder = result;
-        firstNum = '';
-        secondNum = '';
-        chosenOperation = '';
-      }
     }
-
-    // button pressed: numbers
-    else if (!isNaN(value)) {
-      placeholder = placeholder + value;
-      calcDisplayDiv.innerHTML = placeholder;
-    }
-
-    console.log("placeholder: " + placeholder);
-    console.log("firstNum: " + firstNum);
-    console.log("secondNum: " + secondNum);
-    console.log("chosenOperation: " + chosenOperation);
-    console.log("result: " + result);
-    console.log("\n\n\n");
   })
 }
 
@@ -115,9 +150,17 @@ resetCalc = () => {
   secondNum = '';
   chosenOperation = '';
   result = '';
+  totalInput = '';
+
+  calcTotalInputDiv.innerHTML = "";
 }
 
 selectOperation = (value) => {
   placeholder = '';
   chosenOperation = value;
+}
+
+enableDecimals = () => {
+  decimalButton.disabled = false;
+  decimalButton.classList.add("numbers");
 }
