@@ -81,6 +81,10 @@ button:active:not([disabled]) {
   box-shadow: 0px 0px 0px #000;
 }
 
+button:disabled {
+  border: 0px;
+}
+
 .numbers {
   color: white;
   background-color: lightblue;

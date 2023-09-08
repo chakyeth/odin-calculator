@@ -95,6 +95,8 @@ for (button of buttons) {
             secondNum = Number(placeholder);
             firstNum = operate(chosenOperation, firstNum, secondNum);
             calcCurrentInputDiv.innerHTML = firstNum;
+            totalInput = String(firstNum) + " " + value;
+            calcTotalInputDiv.innerHTML = totalInput;
             selectOperation(value);
             secondNum = '';
 
@@ -145,6 +147,7 @@ for (button of buttons) {
 }
 
 resetCalc = () => {
+  enableDecimals();
   placeholder = '';
   firstNum = '';
   secondNum = '';
