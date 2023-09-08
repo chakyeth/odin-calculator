@@ -67,10 +67,11 @@ button {
   align-items: center;
   text-align: center;
   font-weight: 500;
-  font-size: xx-large;
-  font-family: monospace;
+  font-size: x-large;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   border-radius: 20px;
-  margin: 4px 4px;
+  padding: 7px 0px;
+  margin: 5px 5px;
   box-shadow: 3px 3px 3px #000;
 }
 
