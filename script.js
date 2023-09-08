@@ -1,3 +1,12 @@
+// constants
+const calcTotalInputDiv = document.querySelector('.total-input');
+const calcCurrentInputDiv = document.querySelector('.current-input');
+const buttons = document.querySelectorAll('button');
+const decimalButton = document.querySelector('.decimal');
+const operationsArray = ["+", "-", "*", "/"];
+
+
+// functions
 add = (x, y) => {
   return x + y;
 }
@@ -29,13 +38,30 @@ operate = (operation, firstNum, secondNum) => {
   }
 }
 
-const operationsArray = ["+", "-", "*", "/"];
+resetCalc = () => {
+  enableDecimals();
+  placeholder = '';
+  firstNum = '';
+  secondNum = '';
+  chosenOperation = '';
+  result = '';
+  totalInput = '';
 
-const calcTotalInputDiv = document.querySelector('.total-input');
-const calcCurrentInputDiv = document.querySelector('.current-input');
-const buttons = document.querySelectorAll('button');
-const decimalButton = document.querySelector('.decimal');
+  calcTotalInputDiv.innerHTML = "";
+}
 
+selectOperation = (value) => {
+  placeholder = '';
+  chosenOperation = value;
+}
+
+enableDecimals = () => {
+  decimalButton.disabled = false;
+  decimalButton.classList.add("input-button");
+}
+
+
+// logic
 let totalInput = '';
 let placeholder = '';
 let firstNum = '';
@@ -61,7 +87,7 @@ for (button of buttons) {
 
         if (value == ".") {
           decimalButton.disabled = true;
-          decimalButton.classList.remove("numbers");
+          decimalButton.classList.remove("input-button");
         } 
       }
 
@@ -144,26 +170,4 @@ for (button of buttons) {
       }
     }
   })
-}
-
-resetCalc = () => {
-  enableDecimals();
-  placeholder = '';
-  firstNum = '';
-  secondNum = '';
-  chosenOperation = '';
-  result = '';
-  totalInput = '';
-
-  calcTotalInputDiv.innerHTML = "";
-}
-
-selectOperation = (value) => {
-  placeholder = '';
-  chosenOperation = value;
-}
-
-enableDecimals = () => {
-  decimalButton.disabled = false;
-  decimalButton.classList.add("numbers");
 }

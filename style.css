@@ -85,24 +85,24 @@ button:disabled {
   border: 0px;
 }
 
-.numbers {
+.input-button {
   color: white;
   background-color: lightblue;
   border: 0px;
 }
 
-.hehe {
-  background-color: #c0b7b1;
-}
-
-.calc-button {
+.op-button {
   background-color: white;
   color: lightblue;
   border: 0px;
 }
 
-.calc-ac-button {
+.clear-button {
   background-color: #c669;
   color: white;
   border: 0px;
+}
+
+.hehe {
+  background-color: #c0b7b1;
 }
